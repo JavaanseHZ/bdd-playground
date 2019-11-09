@@ -6,9 +6,18 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ContractFormComponent } from './contract-form.component';
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, NgbModule],
-  declarations: [ContractFormComponent],
-  exports: [ContractFormComponent],
-  bootstrap: [ContractFormComponent]
+  imports: [
+      BrowserModule,
+      FormsModule,
+      NgbModule],
+  declarations: [
+      ContractFormComponent
+    ],
+  exports: [
+      ContractFormComponent
+    ],
+  bootstrap: [
+      ContractFormComponent
+    ] 
 })
 export class ContractFormComponentModule {}

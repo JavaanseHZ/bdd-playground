@@ -18,7 +18,8 @@ import { ContractFormComponent } from './contract-form/contract-form.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    NgbModule
+    NgbModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [

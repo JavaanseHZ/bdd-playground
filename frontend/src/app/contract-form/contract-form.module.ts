@@ -3,12 +3,12 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { NgbdDatepickerPopup } from './datepicker-popup';
+import { ContractFormComponent } from './contract-form.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, NgbModule],
-  declarations: [NgbdDatepickerPopup],
-  exports: [NgbdDatepickerPopup],
-  bootstrap: [NgbdDatepickerPopup]
+  declarations: [ContractFormComponent],
+  exports: [ContractFormComponent],
+  bootstrap: [ContractFormComponent]
 })
-export class NgbdDatepickerPopupModule {}
+export class ContractFormComponentModule {}

@@ -8,8 +8,18 @@
             <input type="text" class="form-control" id="name" placeholder="Max Mustermann">
         </div>
       </div>
-     
-      <ngbd-datepicker-popup></ngbd-datepicker-popup>
+      <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="dateOfBirthLabel">Geburtsdatum</span>
+            </div>
+            <input class="form-control" placeholder="yyyy-mm-dd"
+                    name="dp" ngbDatepicker #d="ngbDatepicker" id="dateOfBirth">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+            </div>
+        </div>
+      </div>
       <div class="form-group">
         <div class="input-group">
           <div class="input-group-prepend">
@@ -20,7 +30,7 @@
           </select>
         </div>
       </div>
-      <button type="submit" class="btn">Berechnen</button>  
+      <button type="submit" class="btn submission">Berechnen</button>  
     </form>
 </div>
 <div class="result">

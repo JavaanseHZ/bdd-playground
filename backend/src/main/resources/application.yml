@@ -1,3 +1,8 @@
 spring:
   jackson:
     date-format: yyyy-MM-dd
+
+data:
+  countries:
+    denmark: 123/24123
+    germany: d3e/sd/asd

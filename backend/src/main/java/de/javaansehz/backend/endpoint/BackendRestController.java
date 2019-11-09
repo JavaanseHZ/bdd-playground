@@ -1,19 +1,19 @@
 package de.javaansehz.backend.endpoint;
 
 import de.javaansehz.backend.endpoint.model.Calculation;
+import de.javaansehz.backend.endpoint.model.Country;
 import de.javaansehz.backend.operation.PricingOperation;
 import de.javaansehz.backend.persistance.BackendRepository;
-import de.javaansehz.backend.persistance.CalculationDto;
+import de.javaansehz.backend.persistance.CountryDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.StreamSupport;
 
 import static java.util.stream.Collectors.toList;
 
 @RestController
-@RequestMapping(path = "/api/contract")
+@RequestMapping(path = "/api")
 public class BackendRestController {
 
     @Autowired
@@ -21,36 +21,24 @@ public class BackendRestController {
     @Autowired
     PricingOperation pricingOperation;
 
-    @GetMapping()
-    public List<Calculation> getPreviousFiveCalcuations() {
-        return backendRepository.findTop5ByOrderByIdDesc().stream()
+    @GetMapping("/countries")
+    public List<Country> getCountries() {
+        return backendRepository.findAll().stream()
                 .map(this::mapFromDto)
                 .collect(toList());
     }
 
-    @PostMapping("/calculate")
+    @PostMapping("/contract/calculate")
     public double calculate(@RequestBody Calculation calculation) {
         pricingOperation.calculatePremium(calculation);
-        backendRepository.save(mapToDto(calculation));
         return calculation.getPremium();
     }
 
-    private CalculationDto mapToDto(Calculation calculation) {
-        CalculationDto calculationDto = new CalculationDto();
-        calculationDto.setCountry(calculation.getCountry());
-        calculationDto.setDateOfBirth(calculation.getDateOfBirth());
-        calculationDto.setName(calculation.getName());
-        calculationDto.setPremium(calculation.getPremium());
-        return calculationDto;
-    }
-
-    private Calculation mapFromDto(CalculationDto calculationDto) {
-        Calculation calculation = new Calculation();
-        calculation.setCountry(calculationDto.getCountry());
-        calculation.setDateOfBirth(calculationDto.getDateOfBirth());
-        calculation.setName(calculationDto.getName());
-        calculation.setPremium(calculationDto.getPremium());
-        return calculation;
+    private Country mapFromDto(CountryDto countryDto) {
+        Country country = new Country();
+        country.setName(countryDto.getName());
+        country.setFlagUri(countryDto.getFlagUri());
+        return country;
     }
 
 }

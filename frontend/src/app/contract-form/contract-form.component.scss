@@ -1,0 +1,42 @@
+.container {
+    padding: 40px;
+}
+
+.btn {
+    background-color: #000000;
+    border: none;
+    color: white;
+    float: right;
+}
+ 
+.btn:hover, .btn:focus, .btn:active, .btn.active, .open .dropdown-toggle.btn {
+    background-color: #000000;
+    border: none;
+    color: white;
+}
+
+::-webkit-input-placeholder { /* Edge */
+    color: #cccccc;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #cccccc;
+}
+
+::placeholder {
+    color: #cccccc;
+}
+
+.input-group-text {
+    background: #9bd2dc;
+    color:black;
+    font-weight: 300;
+}
+
+.result {
+    align-items: center;
+    font-weight: 700;
+    font-size: 100px;
+    text-align: center;
+}
+

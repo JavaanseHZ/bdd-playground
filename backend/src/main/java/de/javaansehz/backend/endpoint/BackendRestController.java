@@ -21,6 +21,7 @@ public class BackendRestController {
     @Autowired
     PricingOperation pricingOperation;
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/countries")
     public List<Country> getCountries() {
         return backendRepository.findAll().stream()
@@ -28,6 +29,7 @@ public class BackendRestController {
                 .collect(toList());
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/contract/calculate")
     public double calculate(@RequestBody Calculation calculation) {
         pricingOperation.calculatePremium(calculation);

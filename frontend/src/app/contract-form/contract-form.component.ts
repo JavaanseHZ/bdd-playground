@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Contract } from '../model/contract'
-import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import { ApiService } from '../service//api.service';
 
 @Component({
   selector: 'app-contract-form',
@@ -9,7 +9,7 @@ import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ContractFormComponent implements OnInit {
 
-  countries = ['Deutschland', 'Frankreich'];
+  countries = [];
 
   model = new Contract('',  null, null);
 
@@ -17,12 +17,29 @@ export class ContractFormComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    alert(JSON.stringify(this.model))
+    this.calculate();
   }
 
-  constructor() { }
+  constructor(private api: ApiService) {}
 
   ngOnInit() {
+    this.getCountries();
+  }
+
+  getCountries() {
+    this.api.getCountries()
+      .subscribe(data => {
+        for (const d of (data as any)) {
+          this.countries.push(d.name);
+        }
+        console.log(this.countries);
+      });
+  }
+
+  calculate() {
+    this.api.calculate(this.model).subscribe(data => {
+        alert(data as String);
+    });
   }
 
 }

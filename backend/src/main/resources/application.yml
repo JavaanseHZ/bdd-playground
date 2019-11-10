@@ -6,3 +6,6 @@ data:
   countries:
     - Deutschland
     - Frankreich
+logging:
+  level:
+    root: INFO

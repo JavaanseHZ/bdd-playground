@@ -11,7 +11,7 @@ export class ContractFormComponent implements OnInit {
 
   countries = ['Deutschland', 'Frankreich'];
 
-  model = new Contract('', new NgbDate(2000, 1, 1) , this.countries[0]);
+  model = new Contract('',  null, null);
 
   submitted = false;
 

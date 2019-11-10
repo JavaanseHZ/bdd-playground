@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.util.Map;
+import java.util.List;
 
 @Component
 @EnableConfigurationProperties
@@ -20,20 +20,20 @@ public class CountryOperation {
         this.backendRepository = backendRepository;
     }
 
-    private Map<String, String> countries;
+    private List<String> countries;
 
     @PostConstruct
     void loadCountries() {
-        countries.entrySet().stream()
-                .map(e -> new CountryDto(e.getKey(), e.getValue()))
+        countries.stream()
+                .map(CountryDto::new)
                 .forEach(backendRepository::save);
     }
 
-    public Map<String, String> getCountries() {
+    public List<String> getCountries() {
         return countries;
     }
 
-    public void setCountries(Map<String, String> countries) {
+    public void setCountries(List<String> countries) {
         this.countries = countries;
     }
 }

@@ -11,13 +11,11 @@ public class CountryDto {
     private long id;
 
     private String name;
-    private String flagUri;
 
     public CountryDto() {}
 
-    public CountryDto(String name, String flagUri) {
+    public CountryDto(String name) {
         this.name = name;
-        this.flagUri = flagUri;
     }
 
     public String getName() {
@@ -28,11 +26,4 @@ public class CountryDto {
         this.name = name;
     }
 
-    public String getFlagUri() {
-        return flagUri;
-    }
-
-    public void setFlagUri(String flagUri) {
-        this.flagUri = flagUri;
-    }
 }

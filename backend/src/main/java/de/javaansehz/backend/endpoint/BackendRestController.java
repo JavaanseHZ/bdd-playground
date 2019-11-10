@@ -37,7 +37,6 @@ public class BackendRestController {
     private Country mapFromDto(CountryDto countryDto) {
         Country country = new Country();
         country.setName(countryDto.getName());
-        country.setFlagUri(countryDto.getFlagUri());
         return country;
     }
 

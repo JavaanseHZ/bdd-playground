@@ -9,14 +9,19 @@ import java.time.Period;
 @Service
 public class PricingOperation {
 
-    public void calculatePremium(Calculation calculation) {
-        int years = Period.between(LocalDate.now(), calculation.getDateOfBirth()).getYears();
-        int premium = years * 2;
+    public double calculatePremium(Calculation calculation) {
+        double premium = 30;
+        premium = applyDateOfBirthMultiplier(calculation.getDateOfBirth(), premium);
         premium = applyCountryMultiplier(calculation.getCountry(), premium);
-        calculation.setPremium(premium);
+        return premium;
     }
 
-    private int applyCountryMultiplier(String country, int premium) {
+    private double applyDateOfBirthMultiplier(LocalDate dateOfBirth, double premium) {
+        int years = Period.between(dateOfBirth, LocalDate.now()).getYears();
+        return premium + years;
+    }
+
+    private double applyCountryMultiplier(String country, double premium) {
         switch (country) {
             case "Deutschland":
                 return premium * 3;

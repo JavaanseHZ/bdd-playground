@@ -32,8 +32,7 @@ public class BackendRestController {
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/contract/calculate")
     public double calculate(@RequestBody Calculation calculation) {
-        pricingOperation.calculatePremium(calculation);
-        return calculation.getPremium();
+        return pricingOperation.calculatePremium(calculation);
     }
 
     private Country mapFromDto(CountryDto countryDto) {

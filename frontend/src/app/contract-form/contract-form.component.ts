@@ -13,6 +13,8 @@ export class ContractFormComponent implements OnInit {
 
   model = new Contract('',  null, null);
 
+  premium = '';
+
   submitted = false;
 
   onSubmit() {
@@ -38,7 +40,7 @@ export class ContractFormComponent implements OnInit {
 
   calculate() {
     this.api.calculate(this.model).subscribe(data => {
-        alert(data as String);
+        this.premium = data as string;
     });
   }
 

@@ -7,7 +7,6 @@ public class Calculation {
     private String name;
     private LocalDate dateOfBirth;
     private String country;
-    private double premium;
 
     public String getName() {
         return name;
@@ -33,11 +32,4 @@ public class Calculation {
         this.country = country;
     }
 
-    public double getPremium() {
-        return premium;
-    }
-
-    public void setPremium(double premium) {
-        this.premium = premium;
-    }
 }

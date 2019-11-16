@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeDe from '@angular/common/locales/de';
+registerLocaleData(localeDe, 'de');
 
 @Component({
   selector: 'app-root',

@@ -13,7 +13,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="dateOfBirthLabel">Geburtsdatum</span>
             </div>
-            <input class="form-control" placeholder="yyyy-mm-dd"
+            <input class="form-control" placeholder="tt.mm.yyyy"
                 [(ngModel)]="model.dateOfBirth"
                 name="dateOfBirth" ngbDatepicker #d="ngbDatepicker" id="dateOfBirth">
             <div class="input-group-append">
@@ -36,5 +36,5 @@
     </form>
 </div>
 <div class="result">
-    <p>{{premium}}</p>
+    <p>{{premium | currency : 'EUR'}}</p>
 </div>

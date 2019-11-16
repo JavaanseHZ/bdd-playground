@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Contract } from '../model/contract'
 import { ApiService } from '../service/api.service';
-import {NgbDatepickerConfig, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerConfig, NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-contract-form',
@@ -13,9 +13,11 @@ export class ContractFormComponent implements OnInit {
 
   countries = [];
 
-  model : Contract; // = new Contract('',  {year: 1980, month: 1, day: 1}, null);
+  model : Contract = new Contract();
 
-  premium = '';
+  dateModel : NgbDateStruct;
+
+  premium : Number;
 
   submitted = false;
 
@@ -24,10 +26,11 @@ export class ContractFormComponent implements OnInit {
     this.calculate();
   }
 
-  constructor(private api: ApiService,config: NgbDatepickerConfig, calendar: NgbCalendar) {
+  constructor(private api: ApiService, config: NgbDatepickerConfig, calendar: NgbCalendar) {
     config.minDate = {year: 1900, month: 1, day: 1};
-    //config.startDate = {year: 1980, month: 1};
-    config.maxDate = calendar.getToday();
+    var cal = calendar.getToday();
+    cal.year = cal.year - 18;
+    config.maxDate = cal;
     config.outsideDays = 'hidden';
   }
 
@@ -47,7 +50,7 @@ export class ContractFormComponent implements OnInit {
 
   calculate() {
     this.api.calculate(this.model).subscribe(data => {
-        this.premium = data as string;
+        this.premium = data as Number;
     });
   }
 

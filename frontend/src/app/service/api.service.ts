@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 
 const localUrl = 'http://localhost:8080/api';
 
@@ -15,7 +14,7 @@ const httpOptions = {
 })
 export class ApiService {
 
-  constructor(private http: HttpClient, private parserFormatter: NgbDateParserFormatter) { }
+  constructor(private http: HttpClient) { }
 
   getCountries() {
     return this.http.get(localUrl + "/countries");
@@ -31,7 +30,11 @@ export class ApiService {
   }
 
   private getDateString(date) {
-    return this.parserFormatter.format(date);
+     return `${date.year}-${this.padNumber(date.month)}-${this.padNumber(date.day)}`;
+  }
+
+  private padNumber(value: number) {
+      return `0${value}`.slice(-2);
   }
 
 }

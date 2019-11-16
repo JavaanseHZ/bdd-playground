@@ -1,6 +1,4 @@
 :host {
-  font-family: Roboto, sans-serif;
-  font-size: 14px;
   color: #333;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
@@ -12,8 +10,11 @@ p {
 }
 
 .content {
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
-  margin: 100px auto;
   width: 720px;
   flex-direction: row;
   align-items: center;
@@ -26,13 +27,11 @@ p {
 }
 
 .content-logo {
-  margin-top:30px;
   background-color:#AB1E37; 
 }
 
 .content-forms {
   align-items: center;
-  margin-top:30px;
   height: 460px;
   width: 460px;
   background:rgba(255, 255, 255, 0.5);

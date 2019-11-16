@@ -4,8 +4,10 @@ spring:
 
 data:
   countries:
-    - Deutschland
-    - Frankreich
+    Deutschland: 3.25
+    Frankreich: 4.15
+    Sonstige: 5.0
+  basepremium: 30.0
 logging:
   level:
     root: INFO

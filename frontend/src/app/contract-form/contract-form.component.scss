@@ -7,11 +7,18 @@
     border: none;
     color: white;
     float: right;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    width: 100%;
 }
 .submission:hover, .submission:focus, .submission:active, .submission.active, .open .dropdown-toggle.btn {
     background-color: #000000;
     border: none;
     color: white;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
 }
 
 button.calendar, button.calendar:active {
@@ -21,24 +28,32 @@ button.calendar, button.calendar:active {
     background-size: 23px;
     background-position: center;
     height:2.4rem;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    border-color: #AB1E37;
 }
   
-  ::-webkit-input-placeholder { /* Edge */
+::-webkit-input-placeholder { /* Edge */
     color: #cccccc;
-  }
-  
-  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
     color: #cccccc;
-  }
-  
-  ::placeholder {
+}
+
+::placeholder {
     color: #cccccc;
-  }
+}
 
 .input-group-text {
-    background: #9bd2dc;
-    color:black;
+    background: #AB1E37;
+    color:white;
     font-weight: 300;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    border-color: #AB1E37;
 }
 
 .result {
@@ -46,5 +61,12 @@ button.calendar, button.calendar:active {
     font-weight: 700;
     font-size: 100px;
     text-align: center;
+}
+
+.form-control {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    border-color: #AB1E37;
 }
 

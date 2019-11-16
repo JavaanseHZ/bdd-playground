@@ -14,25 +14,30 @@ p {
 .content {
   display: flex;
   margin: 100px auto;
-  width: 900px;
-  flex-direction: column;
-  align-items: center right;
-  background: url('../assets/img/playground_city_logo.svg');
-  background-repeat: no-repeat;
-  background-position:30px 110px;
+  width: 750px;
+  flex-direction: row;
+  align-items: center;
+ 
   font-family: Roboto Condensed, sans-serif;
 }
 
-.content-forms {
-  align-items: center right;
-  margin-left:400px;
+.content-logo img {
+  height: 350px;
+  margin: 20px; 
+}
+
+.content-logo {
   margin-top:30px;
-  margin-right:30px;
-  width: 500px;
+  background-color:#AB1E37; 
+}
+
+.content-forms {
+  align-items: center;
+  margin-top:30px;
   height: 390px;
   background:rgba(255, 255, 255, 0.5);
   border-width: 1px;
   border-style: solid;
-  border-color: #ccc;
+  border-color: #AB1E37;
 }
 

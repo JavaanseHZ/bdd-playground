@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Contract } from '../model/contract'
-import { ApiService } from '../service//api.service';
+import { ApiService } from '../service/api.service';
+import {NgbDatepickerConfig, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-contract-form',
   templateUrl: './contract-form.component.html',
-  styleUrls: ['./contract-form.component.scss']
+  styleUrls: ['./contract-form.component.scss'],
+  providers: [NgbDatepickerConfig]
 })
 export class ContractFormComponent implements OnInit {
 
   countries = [];
 
-  model = new Contract('',  null, null);
+  model : Contract; // = new Contract('',  {year: 1980, month: 1, day: 1}, null);
 
   premium = '';
 
@@ -22,7 +24,12 @@ export class ContractFormComponent implements OnInit {
     this.calculate();
   }
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService,config: NgbDatepickerConfig, calendar: NgbCalendar) {
+    config.minDate = {year: 1900, month: 1, day: 1};
+    //config.startDate = {year: 1980, month: 1};
+    config.maxDate = calendar.getToday();
+    config.outsideDays = 'hidden';
+  }
 
   ngOnInit() {
     this.getCountries();

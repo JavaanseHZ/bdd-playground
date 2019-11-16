@@ -1,11 +1,18 @@
 package de.javaansehz.backend.endpoint.model;
 
+import de.javaansehz.backend.endpoint.validaton.AgeInRange;
+
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public class Calculation {
 
+    @NotNull(message = "Bitte Name angeben!")
     private String name;
+    @NotNull(message = "Bitte Geburtsdatum angeben!")
+    @AgeInRange(min=18, max=65, message = "Alter nicht zwischen 18 und 65!")
     private LocalDate dateOfBirth;
+    @NotNull(message = "Bitte Wohnort angeben!")
     private String country;
 
     public String getName() {

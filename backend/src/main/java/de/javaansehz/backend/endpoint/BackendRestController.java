@@ -6,8 +6,12 @@ import de.javaansehz.backend.operation.PricingOperation;
 import de.javaansehz.backend.persistance.BackendRepository;
 import de.javaansehz.backend.persistance.CountryDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -31,7 +35,7 @@ public class BackendRestController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/contract/calculate")
-    public double calculate(@RequestBody Calculation calculation) {
+    public double calculate(@Valid @RequestBody Calculation calculation) {
         return pricingOperation.calculatePremium(calculation);
     }
 
@@ -40,5 +44,4 @@ public class BackendRestController {
         country.setName(countryDto.getName());
         return country;
     }
-
 }

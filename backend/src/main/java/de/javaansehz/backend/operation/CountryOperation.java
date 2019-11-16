@@ -4,12 +4,12 @@ import de.javaansehz.backend.persistance.BackendRepository;
 import de.javaansehz.backend.persistance.CountryDto;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.Map;
 
-@Component
+@Service
 @EnableConfigurationProperties
 @ConfigurationProperties(prefix = "data")
 public class CountryOperation {

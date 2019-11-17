@@ -31,6 +31,9 @@ export class ContractFormComponent implements OnInit {
   @ViewChild('ttcountry', {static: false}) countryTooltip: NgbTooltip;
 
   onSubmit() {
+    this.nameTooltip.close();
+    this.countryTooltip.close();
+    this.calendarTooltip.close();
     this.submitted = true;
     this.calculate();
   }

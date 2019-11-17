@@ -77,7 +77,7 @@ task bddUnitTest() {
 			classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.testUnitBdd.output
 			args = ['--plugin', 'pretty',
 					'--plugin', 'junit:build/test-results/cucumber-junit.xml',
-					'--plugin', 'json:build/cucumber-test-results/bddunit.json',
+					'--plugin', 'json:../reports/bddunit.json',
 					'--glue', 'de.javaansehz.backend', '../features',
 					//'--tags', '@unit',
 					'--tags', '@unit or @simple']
@@ -93,14 +93,15 @@ task bddIntegrationTest() {
 			classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.testIntegrationBdd.output
 			args = ['--plugin', 'pretty',
 					'--plugin', 'junit:build/test-results/cucumber-springboot.xml',
-					'--plugin', 'json:build/cucumber-test-results/bddintegration.json',
+					'--plugin', 'json:../reports/bddintegration.json',
 					'--glue', 'de.javaansehz.backend', '../features',
-					'--tags', '@integration']
+					'--tags', '@integration'
+			]
 		}
 	}
 }
 
 cluecumberReports {
-	sourceJsonReportDirectory = "build/cucumber-test-results"
-	generatedHtmlReportDirectory = "build/cucumber-test-results"
+	sourceJsonReportDirectory = "../reports"
+	generatedHtmlReportDirectory = "../reports"
 }

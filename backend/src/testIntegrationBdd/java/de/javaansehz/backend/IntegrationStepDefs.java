@@ -1,20 +1,25 @@
 package de.javaansehz.backend;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import de.javaansehz.backend.endpoint.model.Calculation;
+import de.javaansehz.backend.endpoint.model.Country;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java8.En;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
-public class ValidationStepDefs extends MvcContextSpringbootTest implements En  {
+public class IntegrationStepDefs extends CompleteContextSpringbootTest implements En  {
 
-    Logger logger = LoggerFactory.getLogger(ValidationStepDefs.class);
+    Logger logger = LoggerFactory.getLogger(IntegrationStepDefs.class);
 
     private MvcResult result;
     private Calculation calculation = new Calculation();
@@ -23,7 +28,7 @@ public class ValidationStepDefs extends MvcContextSpringbootTest implements En  
     private String name = "Max Meyer";
     private String country = "Deutschland";
 
-    public ValidationStepDefs() {
+    public IntegrationStepDefs() {
 
         Given("ich gebe kein(e?n?) {string} an", (String string) -> {
             switch (string) {
@@ -107,6 +112,21 @@ public class ValidationStepDefs extends MvcContextSpringbootTest implements En  
                             .doesNotContain("country");
                     break;
             }
+        });
+
+        When("ich einen Wohnort auswählen möchte", () -> {
+            result = mockMvc.perform(
+                    get("/api/countries")
+                            .contentType("application/json")
+            ).andReturn();
+            logger.info("response: " + result.getResponse().getContentAsString());
+        });
+
+        Then("sollen folgende auswählbar sein:", (DataTable dataTable) -> {
+            List<Country> resultCountries = objectMapper.readValue(result.getResponse().getContentAsString(), objectMapper.getTypeFactory().constructCollectionType(List.class, Country.class));
+            assertThat(resultCountries)
+                    .extracting("name")
+                    .containsExactlyElementsOf(dataTable.asList());
         });
     }
 }

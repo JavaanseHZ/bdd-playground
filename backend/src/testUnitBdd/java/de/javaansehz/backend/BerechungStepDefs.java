@@ -16,6 +16,10 @@ public class BerechungStepDefs implements En {
 
     public BerechungStepDefs() {
 
+        Given("ich möchte einen Vertrag berechnen", () -> {
+            calculation = new Calculation();
+        });
+
         Given("ich wohne in {string}", (String string) -> {
             calculation.setCountry(string);
         });

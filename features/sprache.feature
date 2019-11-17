@@ -1,4 +1,5 @@
 # language: de
+@ui
 Funktionalität: Sprache und Datenformate
     Als Kunde möchte ich alle Daten auf Deutsch eingeben.
     Datumswerte und Währungen sollen im deutschen Format angezeigt werden.

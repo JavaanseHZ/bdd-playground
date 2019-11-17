@@ -8,7 +8,8 @@ Funktionalität: Berechnung eines Vertrags examples
     (Sockelbetrag + (Zehnerstelle des Alters * 7)) * Wohnort-Multiplikator
 
     Grundlage:
-        Angenommen der Multiplikator für "Deutschland" ist 3.25
+        Angenommen ich möchte einen Vertrag berechnen
+        Und der Multiplikator für "Deutschland" ist 3.25
         Und der Multiplikator für "Frankreich" ist 4.15
         Und der Multiplikator für "Sonstige" ist 5.0
         Und der Sockelbetrag ist 30.00 Euro

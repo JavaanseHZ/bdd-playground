@@ -1,3 +1,4 @@
+@simple
 Feature: Berechnung eines Vertrags simple
     Als Kunde möchte ich einen Vertrag berechnen und einen Beitrag ermiteln.
     Der Beitrag wird auf Basis eines Sockelbetrags,

@@ -1,9 +1,15 @@
 # language: de
+@integration
 Funktionalität: Validierung der Kundeneingabe
     Als Kunde möchte ich meinen Namen, mein Geburtsdatum und meinen Wohnort eingeben.
     Dabei soll ich Hinweise bekommen, wenn ich falsche Eingaben mache.
     Das erlaubte Alter liegt dabei zwischen 18 und 65.
     
+    Szenario: Alle Eingaben korrekt angegeben
+        Angenommen ich habe alle anderen Angaben korrekt eingegeben
+        Wenn ich einen Vertrag berechne
+        Dann soll kein Hinweis erscheinen
+
     Szenario: Name wird nicht angegeben
         Angenommen ich gebe keinen "Namen" an
         Und ich habe alle anderen Angaben korrekt eingegeben

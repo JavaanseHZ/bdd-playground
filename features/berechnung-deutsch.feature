@@ -1,4 +1,5 @@
 # language: de
+@unit
 Funktionalität: Berechnung eines Vertrags deutsch
     Als Kunde möchte ich einen Vertrag berechnen und einen Beitrag ermiteln.
     Der Beitrag wird auf Basis eines Sockelbetrags,
@@ -15,13 +16,13 @@ Funktionalität: Berechnung eines Vertrags deutsch
         Angenommen ich wohne in "Deutschland"
         Und ich bin 25 Jahre alt
         Wenn ich einen Vertrag berechne
-        Dann soll ein Beitrag von 104.55 Euro ermittelt werden
+        Dann soll ein Beitrag von 143.00 Euro ermittelt werden
     
     Szenario: Alter 45, Wohnort Frankreich
         Angenommen ich wohne in "Frankreich"
         Und ich bin 45 Jahre alt
         Wenn ich einen Vertrag berechne
-        Dann soll ein Beitrag von 204.15 Euro ermittelt werden
+        Dann soll ein Beitrag von 240.70 Euro ermittelt werden
 
 
 

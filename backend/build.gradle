@@ -78,7 +78,9 @@ task bddUnitTest() {
 			args = ['--plugin', 'pretty',
 					'--plugin', 'junit:build/test-results/cucumber-junit.xml',
 					'--plugin', 'json:build/cucumber-test-results/bddunit.json',
-					'--glue', 'de.javaansehz.backend', '../features']
+					'--glue', 'de.javaansehz.backend', '../features',
+					//'--tags', '@unit',
+					'--tags', '@unit or @simple']
 		}
 	}
 }
@@ -92,12 +94,13 @@ task bddIntegrationTest() {
 			args = ['--plugin', 'pretty',
 					'--plugin', 'junit:build/test-results/cucumber-springboot.xml',
 					'--plugin', 'json:build/cucumber-test-results/bddintegration.json',
-					'--glue', 'de.javaansehz.backend', '../features']
+					'--glue', 'de.javaansehz.backend', '../features',
+					'--tags', '@integration']
 		}
 	}
 }
 
 cluecumberReports {
 	sourceJsonReportDirectory = "build/cucumber-test-results"
-	generatedHtmlReportDirectory = "build/cucumber-test-reports"
+	generatedHtmlReportDirectory = "build/cucumber-test-results"
 }

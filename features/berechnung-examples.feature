@@ -1,4 +1,5 @@
 # language: de
+@unit
 Funktionalität: Berechnung eines Vertrags examples
     Als Kunde möchte ich einen Vertrag berechnen und einen Beitrag ermiteln.
     Der Beitrag wird auf Basis eines Sockelbetrags,
@@ -20,24 +21,24 @@ Funktionalität: Berechnung eines Vertrags examples
         
         Beispiele:
             | alter | wohnort       | beitrag   |
-            | 18    | Deutschland   | 105.65    |
-            | 28    | Deutschland   | 105.65    |
-            | 38    | Deutschland   | 105.65    |
-            | 48    | Deutschland   | 105.65    |
-            | 58    | Deutschland   | 105.65    |
-            | 65    | Deutschland   | 105.65    |
-            | 18    | Frankreich    |  15.00    |
-            | 28    | Frankreich    |  15.00    |
-            | 38    | Frankreich    |  15.00    |
-            | 48    | Frankreich    |  15.00    |
-            | 58    | Frankreich    |  15.00    |
-            | 65    | Frankreich    |  15.00    |
-            | 18    | Sonstige      |  15.00    |
-            | 28    | Sonstige      |  15.00    |
-            | 38    | Sonstige      |  15.00    |
-            | 48    | Sonstige      |  15.00    |
-            | 58    | Sonstige      |  15.00    |
-            | 65    | Sonstige      |  15.00    |
+            | 18    | Deutschland   | 120.25    |
+            | 28    | Deutschland   | 143.00    |
+            | 38    | Deutschland   | 165.75    |
+            | 48    | Deutschland   | 188.50    |
+            | 58    | Deutschland   | 211.25    |
+            | 65    | Deutschland   | 234.00    |
+            | 18    | Frankreich    | 153.55    |
+            | 28    | Frankreich    | 182.60    |
+            | 38    | Frankreich    | 211.65    |
+            | 48    | Frankreich    | 240.70    |
+            | 58    | Frankreich    | 269.75    |
+            | 65    | Frankreich    | 298.80    |
+            | 18    | Sonstige      | 185.00    |
+            | 28    | Sonstige      | 220.00    |
+            | 38    | Sonstige      | 255.00    |
+            | 48    | Sonstige      | 290.00    |
+            | 58    | Sonstige      | 325.00    |
+            | 65    | Sonstige      | 360.00    |
 
 
    

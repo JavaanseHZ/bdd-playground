@@ -1,8 +1,5 @@
 package de.javaansehz.backend.endpoint.model;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class ErrorMessage {
 
     private String field;
@@ -10,6 +7,22 @@ public class ErrorMessage {
 
     public ErrorMessage(String field, String message) {
         this.field = field;
+        this.message = message;
+    }
+
+    public String getField() {
+        return field;
+    }
+
+    public void setField(String field) {
+        this.field = field;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
         this.message = message;
     }
 }

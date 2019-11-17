@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -37,6 +38,9 @@ public class PricingOperation {
     }
 
     public Map<String, Double> getCountries() {
+        if(countries == null) {
+            countries = new HashMap<>();
+        }
         return countries;
     }
 

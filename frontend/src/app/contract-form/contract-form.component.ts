@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { Contract } from '../model/contract'
 import { ApiService } from '../service/api.service';
-import { NgbDatepickerConfig, NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerConfig, NgbCalendar, NgbDateStruct, NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
+import { ValidationError } from '../model/validationerror';
 
 @Component({
   selector: 'app-contract-form',
@@ -21,12 +22,23 @@ export class ContractFormComponent implements OnInit {
 
   submitted = false;
 
+  ttnameContentModel : String;
+  ttcalendarContentModel : String;
+  ttcountryContentModel : String;
+
+  @ViewChild('ttname', {static: false}) nameTooltip: NgbTooltip;
+  @ViewChild('ttcalendar', {static: false}) calendarTooltip: NgbTooltip;
+  @ViewChild('ttcountry', {static: false}) countryTooltip: NgbTooltip;
+
   onSubmit() {
     this.submitted = true;
     this.calculate();
   }
 
-  constructor(private api: ApiService, config: NgbDatepickerConfig, calendar: NgbCalendar) {
+  constructor(private api: ApiService,
+      config: NgbDatepickerConfig,
+      calendar: NgbCalendar,
+      private ref : ChangeDetectorRef) {
     var calMin = calendar.getToday();
     calMin.year = calMin.year - 65;
     config.minDate = calMin;
@@ -46,14 +58,50 @@ export class ContractFormComponent implements OnInit {
         for (const d of (data as any)) {
           this.countries.push(d.name);
         }
+        this.countries.push('');
         console.log(this.countries);
       });
   }
 
   calculate() {
-    this.api.calculate(this.model).subscribe(data => {
+    this.api.caculateContract(this.model).subscribe(
+    data => {
+        console.log(data);      
         this.premium = data as Number;
+    },
+    errors => {
+      for (let i = 0; i < errors.length; i++) {
+        const validationError = errors[i] as ValidationError;
+        switch (validationError.field) {
+          case 'name':
+            this.ttnameContentModel = validationError.message;
+            this.ref.detectChanges();
+            this.nameTooltip.open();
+            break;
+          case 'dateOfBirth':
+            this.ttcalendarContentModel = validationError.message;
+            this.ref.detectChanges();
+            this.calendarTooltip.open();
+            break;
+          case 'country':
+            this.ttcountryContentModel = validationError.message;
+            this.ref.detectChanges();
+            this.countryTooltip.open();
+            break;
+          default:
+            break;
+        }
+      }
     });
   }
+
+  clear(): void {
+    this.model.dateOfBirth = undefined;
+  }
+
+  modelChanged(val) {
+    this.premium = undefined;
+  }
+
 
 }

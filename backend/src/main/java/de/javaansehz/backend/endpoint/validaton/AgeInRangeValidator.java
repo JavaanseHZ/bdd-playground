@@ -19,6 +19,9 @@ public class AgeInRangeValidator implements ConstraintValidator<AgeInRange, Loca
     public boolean isValid(LocalDate value, ConstraintValidatorContext context) {
         LocalDate minDate = LocalDate.now().minusYears(max);
         LocalDate maxDate = LocalDate.now().minusYears(min);
-        return value == null || (value.isAfter(minDate) && value.isBefore(maxDate));
+        return value == null
+                || value.isEqual(minDate)
+                || value.isEqual(maxDate)
+                || (value.isAfter(minDate) && value.isBefore(maxDate));
     }
 }

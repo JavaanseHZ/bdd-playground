@@ -13,9 +13,12 @@ java {
 }
 
 configurations {
-	developmentOnly
-	runtimeClasspath {
-		extendsFrom developmentOnly
+//	developmentOnly
+//	runtimeClasspath {
+//		extendsFrom developmentOnly
+//	}
+	cucumberRuntime {
+		extendsFrom testImplementation
 	}
 }
 
@@ -31,6 +34,9 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+	testImplementation 'io.cucumber:cucumber-java8:4.7.4'
+	testImplementation 'io.cucumber:cucumber-junit:4.7.4'
+	testImplementation 'io.cucumber:cucumber-spring:4.7.4'
 }
 
 test {

@@ -13,11 +13,23 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="dateOfBirthLabel">Geburtsdatum</span>
             </div>
-            <input class="form-control" placeholder="tt.mm.yyyy"
+            <input class="form-control"
+                placeholder="tt.mm.yyyy"
+                [readonly] = "true"
                 [(ngModel)]="model.dateOfBirth"
-                name="dateOfBirth" ngbDatepicker #d="ngbDatepicker" id="dateOfBirth">
+                name="dateOfBirth"
+                ngbDatepicker #d="ngbDatepicker"
+                id="dateOfBirth"
+                (click)="d.toggle();d.navigateTo(
+                    {year:!model.dateOfBirth?1980:model.dateOfBirth.year,
+                    month:!model.dateOfBirth?1:model.dateOfBirth.month})">
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                <button class="btn btn-outline-secondary calendar"
+                  (click)="d.toggle();d.navigateTo(
+                    {year:!model.dateOfBirth?1980:model.dateOfBirth.year,
+                    month:!model.dateOfBirth?1:model.dateOfBirth.month})"
+                  type="button">
+                </button>
             </div>
         </div>
       </div>

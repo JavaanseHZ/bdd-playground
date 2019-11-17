@@ -9,3 +9,24 @@ body {
   background-repeat: no-repeat;
   background-position:top center;
 }
+
+.ngb-dp-weekday {
+    color: #AB1E37!important;
+    color: var(--info);
+}
+
+.ngb-dp-day .bg-primary {
+  background-color: #AB1E37!important;
+}
+
+.ngb-dp-navigation-chevron {
+  color: #AB1E37!important;
+}
+
+.ngb-dp-navigation-select select {
+  border-radius:0px!important;
+}
+
+ngb-datepicker {
+  border-radius:0px!important;
+}

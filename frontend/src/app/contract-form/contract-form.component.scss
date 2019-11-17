@@ -21,6 +21,7 @@
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 0;
+    box-shadow: 0 0 0 0.1rem rgba(0, 0, 0, 0.25);
 }
 
 button.calendar, button.calendar:active {
@@ -29,7 +30,7 @@ button.calendar, button.calendar:active {
     background-repeat: no-repeat;
     background-size: 23px;
     background-position: center;
-    height:2.8rem;
+    height:2.85rem;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 0;
@@ -74,5 +75,15 @@ button.calendar, button.calendar:active {
     border-radius: 0;
     border-color: #AB1E37;
     font-size: 1.3rem;
+}
+
+.form-control:focus {
+    border-color: #AB1E37;
+    box-shadow: 0 0 0 0.1rem rgba(0, 0, 0, 0.25);
+}
+
+button.calendar:focus {
+    border-color: #AB1E37;
+    box-shadow: 0 0 0 0.1rem rgba(0, 0, 0, 0.25);
 }
 

@@ -27,10 +27,12 @@ export class ContractFormComponent implements OnInit {
   }
 
   constructor(private api: ApiService, config: NgbDatepickerConfig, calendar: NgbCalendar) {
-    config.minDate = {year: 1900, month: 1, day: 1};
-    var cal = calendar.getToday();
-    cal.year = cal.year - 18;
-    config.maxDate = cal;
+    var calMin = calendar.getToday();
+    calMin.year = calMin.year - 65;
+    config.minDate = calMin;
+    var calMax = calendar.getToday();
+    calMax.year = calMax.year - 18;
+    config.maxDate = calMax;
     config.outsideDays = 'hidden';
   }
 

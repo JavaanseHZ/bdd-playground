@@ -7,24 +7,9 @@ plugins {
 
 group = 'de.javaansehz'
 version = '0.0.1-SNAPSHOT'
-java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
-}
 
-configurations {
-//	developmentOnly
-//	runtimeClasspath {
-//		extendsFrom developmentOnly
-//	}
-	cucumberRuntime {
-		extendsFrom testImplementation
-	}
-}
-
-repositories {
-	mavenCentral()
-}
+def cucumberVersion = '4.7.4'
+def junitVersion = '5.5.0'
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
@@ -34,11 +19,75 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
-	testImplementation 'io.cucumber:cucumber-java8:4.7.4'
-	testImplementation 'io.cucumber:cucumber-junit:4.7.4'
-	testImplementation 'io.cucumber:cucumber-spring:4.7.4'
+	testImplementation "io.cucumber:cucumber-java8:${cucumberVersion}"
+	testImplementation "io.cucumber:cucumber-junit:${cucumberVersion}"
+	testImplementation "io.cucumber:cucumber-spring:${cucumberVersion}"
+	testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+	testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+	testRuntimeOnly "org.junit.vintage:junit-vintage-engine:${junitVersion}"
 }
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+sourceSets {
+	testUnitBdd {
+		java {
+			compileClasspath += main.output
+			runtimeClasspath += main.output
+		}
+	}
+
+	testIntegrationBdd {
+		java {
+			compileClasspath += main.output
+			runtimeClasspath += main.output
+		}
+	}
+}
+
+configurations {
+	cucumberRuntime {
+		extendsFrom testImplementation
+	}
+
+	testUnitBddCompile.extendsFrom testImplementation
+	testUnitBddRuntime.extendsFrom testRuntime
+
+	testIntegrationBddCompile.extendsFrom testImplementation
+	testIntegrationBddRuntime.extendsFrom testRuntime
+}
+
+repositories {
+	mavenCentral()
+}
+
+
 
 test {
 	useJUnitPlatform()
+}
+
+task bddUnitTest() {
+	dependsOn assemble, compileTestJava
+	doLast {
+		javaexec {
+			main = "io.cucumber.core.cli.Main"
+			classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.testUnitBdd.output
+			args = ['--plugin', 'pretty', '--glue', 'gradle.cucumber', '../features']
+		}
+	}
+}
+
+task bddIntegrationTest() {
+	dependsOn assemble, compileTestJava
+	doLast {
+		javaexec {
+			main = "io.cucumber.core.cli.Main"
+			classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.testIntegrationBdd.output
+			args = ['--plugin', 'pretty', '--glue', 'gradle.cucumber', '../features']
+		}
+	}
 }

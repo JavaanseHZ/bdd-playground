@@ -9,6 +9,10 @@ chai.use(require('chai-match'));
 let expect = chai.expect;
 let assert = chai.assert
 
+var nameTmp = "Max Mayer"; 
+var dateOfBirthTmp = "01.01.1980";
+var countryTmp = "Deutschland";
+
 Before(async () => {
   page = new AppPage();
   await page.navigateTo();
@@ -56,23 +60,62 @@ Then('soll ein Beitrag von {float} Euro ermittelt werden', async (premium) => {
 });
 
 When('ich ein Datum auswähle', async () => {
-    return await 'pending';
+    await page.pushCalendarButton();
+    return await page.enterDateCalendar();
 });
 
 Then('soll das Datum im deutschen Format angezeigt werden', async () => {
-    return await 'pending';
+    return await expect(Promise.resolve(page.getDateOfBirth()))
+    .to.eventually.match(/[0-9]{2}[.][0-9]{2}[.][0-9]{4}/);
   });
 
 When('ich einen Beitrag berechnet habe', async () => {
-    await page.enterNameInput("Marko");
-    await page.enterCountryInput("Deutschland");
-    await page.enterDateInput(40);
+    await page.enterNameInput(nameTmp);
+    await page.enterCountryInput(countryTmp);
+    await page.enterDateInputByString(dateOfBirthTmp);
     return await page.pushCalculateButton();
 });
 
 Then('soll der Beitrag im deutschen Format mit Euro Zeichen angezeigt werden', async () => {
     return await expect(Promise.resolve(page.getPremium()))
-    .to.eventually.match(/[0-9]+[,]{1}[0-9]{2}[ ]{1}[€]{1}/);
+    .to.eventually.match(/[0-9]+[,][0-9]{2}[ ][€]/);
 });
+
+Given('ich habe alle anderen Angaben korrekt eingegeben', async() => {
+    await page.enterNameInput(nameTmp);
+    await page.enterCountryInput(countryTmp);
+    return await page.enterDateInputByString(dateOfBirthTmp);
+});
+
+Then('soll kein Hinweis erscheinen', async() => {
+   return await expect(page.isTooltipPresent()).to.equal(false);
+});
+
+Given('ich gebe kein/keinen {string} an', async(string) => {
+    switch(string) {
+        case "Namen":
+            nameTmp = '';
+            return await page.enterNameInput(nameTmp);
+        case "Geburtsdatum":
+            dateOfBirthTmp = '';
+            return await page.enterDateInputByString(dateOfBirthTmp);
+        case "Wohnort":
+            countryTmp = '';
+            return await page.enterDateInputByString(countryTmp);
+    };
+});
+
+Then('soll ein Hinweis zur Korrektur für das/den {string} erscheinen', async(string) => {
+    return await expect(Promise.resolve
+            (page.getToolTipsAll()
+                .filter((elem) => {
+                    return elem.getText().then((text) => text.includes(string));
+                }
+            ).count())
+        )
+    .to.eventually.equal(1);
+});
+
+
 
 

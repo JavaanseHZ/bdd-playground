@@ -5,10 +5,21 @@ Funktionalität: Validierung der Kundeneingabe
     Dabei soll ich Hinweise bekommen, wenn ich falsche Eingaben mache.
     Das erlaubte Alter liegt dabei zwischen 18 und 65.
     
+    @ui
     Szenario: Alle Eingaben korrekt angegeben
         Angenommen ich habe alle anderen Angaben korrekt eingegeben
         Wenn ich einen Vertrag berechne
         Dann soll kein Hinweis erscheinen
+
+    @ui
+    Szenario: Keine Eingaben korrekt angegeben
+        Angenommen ich gebe keinen "Namen" an
+        Angenommen ich gebe kein "Geburtsdatum" an
+        Angenommen ich gebe keinen "Wohnort" an
+        Wenn ich einen Vertrag berechne
+        Dann soll ein Hinweis zur Korrektur für das "Namen" erscheinen
+        Dann soll ein Hinweis zur Korrektur für den "Geburtsdatum" erscheinen
+        Dann soll ein Hinweis zur Korrektur für den "Wohnort" erscheinen
 
     Szenario: Name wird nicht angegeben
         Angenommen ich gebe keinen "Namen" an
@@ -40,7 +51,7 @@ Funktionalität: Validierung der Kundeneingabe
         Wenn ich einen Vertrag berechne
         Dann soll ein Hinweis zur Korrektur für den "Wohnort" erscheinen
 
-    Szenario: Mehrere Daten nicht angegeben
+    Szenario: Wohnort und Name nicht angegeben
         Angenommen ich gebe keinen "Wohnort" an
         Und ich gebe keinen "Namen" an
         Und ich habe alle anderen Angaben korrekt eingegeben

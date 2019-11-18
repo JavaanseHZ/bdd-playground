@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 public class Calculation {
 
-    @NotEmpty(message = "Bitte Name angeben!")
+    @NotEmpty(message = "Bitte Namen angeben!")
     private String name;
     @NotNull(message = "Bitte Geburtsdatum angeben!")
     @AgeInRange(min=18, max=65, message = "Alter nicht zwischen 18 und 65!")

@@ -13,6 +13,7 @@ Funktionalität: Berechnung eines Vertrags examples
         Und der Multiplikator für "Frankreich" ist 4.15
         Und der Multiplikator für "Sonstige" ist 5.0
         Und der Sockelbetrag ist 30.00 Euro
+        Und ich heiße "Max Mayer"
   
     Szenariogrundriss: Alter <alter>, Wohnort <wohnort>
         Angenommen ich wohne in "<wohnort>"

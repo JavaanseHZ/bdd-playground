@@ -10,6 +10,7 @@ Feature: Berechnung eines Vertrags simple
         Given ich möchte einen Vertrag berechnen
         And der Multiplikator für "Deutschland" ist 3.25
         And der Sockelbetrag ist 30.00 Euro
+        And ich heiße "Max Mayer"
         And ich wohne in "Deutschland"
         And ich bin 25 Jahre alt
         When ich einen Vertrag berechne

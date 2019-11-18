@@ -4,6 +4,7 @@ exports.config = {
   capabilities: {
     browserName: 'chrome'
   },
+  SELENIUM_PROMISE_MANAGER: false,
   directConnect: true,
   baseUrl: 'http://localhost:4200/',
   framework: 'custom',
@@ -16,9 +17,12 @@ exports.config = {
     tags: '@ui'
   },
  
-  onPrepare() {
+  onPrepare () {
     require('ts-node').register({
       project: require('path').join(__dirname, './tsconfig.json')
     });
+    browser.waitForAngularEnabled(false);
+    browser.manage().timeouts().implicitlyWait(30000);
+    browser.ignoreSynchronization = true;
   }
 };

@@ -12,6 +12,7 @@ Funktionalität: Berechnung eines Vertrags deutsch
         Und der Multiplikator für "Deutschland" ist 3.25
         Und der Multiplikator für "Frankreich" ist 4.15
         Und der Sockelbetrag ist 30.00 Euro
+        Und ich heiße "Max Mayer"
     @ui
     Szenario: Alter 25, Wohnort Deutschland
         Angenommen ich wohne in "Deutschland"

@@ -28,6 +28,10 @@ public class BerechungStepDefs implements En {
             pricingOperation.getCountries().put(string, double1);
         });
 
+        Given("ich heiße {string}", (String string) -> {
+            calculation.setName(string);
+        });
+
         Given("ich bin {int} Jahre alt", (Integer int1) -> {
             LocalDate alter = LocalDate.now().minusYears(int1);
             calculation.setDateOfBirth(alter);

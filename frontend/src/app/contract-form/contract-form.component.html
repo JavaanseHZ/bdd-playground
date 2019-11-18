@@ -9,7 +9,7 @@
             class="form-control"
             [(ngModel)]="model.name"
             (ngModelChange)="modelChanged($event);ttname.close()"
-            id="name"
+            id="nameId"
             name="name"
             ngbTooltip="{{ttnameContentModel}}"
             placement="right"
@@ -25,12 +25,11 @@
             </div>
             <input class="form-control"
                 placeholder="tt.mm.yyyy"
-                [readonly] = "true"
                 [(ngModel)]="model.dateOfBirth"
                 (ngModelChange)="modelChanged($event);ttcalendar.close()"
                 name="dateOfBirth"
                 ngbDatepicker #d="ngbDatepicker"
-                id="dateOfBirth"
+                id="dateOfBirthId"
                 (click)="d.toggle();d.navigateTo(
                     {year:!model.dateOfBirth?1980:model.dateOfBirth.year,
                     month:!model.dateOfBirth?1:model.dateOfBirth.month})">
@@ -62,7 +61,7 @@
           class="form-control"
           [(ngModel)]="model.country"
           (ngModelChange)="modelChanged($event);ttcountry.close()"
-          id="country"
+          id="countryId"
           name="country"
           ngbTooltip="{{ttcountryContentModel}}"
           placement="right"
@@ -74,9 +73,9 @@
           </select>
         </div>
       </div>
-      <button type="submit" class="btn submission" id="calculationButton">Berechnen</button>  
+      <button type="submit" class="btn submission" id="calculationButtonId">Berechnen</button>  
     </form>
 </div>
 <div class="result">
-    <p id="premium">{{premium | currency : 'EUR'}}</p>
+    <p id="premiumId">{{premium | currency : 'EUR'}}</p>
 </div>

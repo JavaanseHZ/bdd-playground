@@ -1,69 +1,78 @@
 import { Before, Given, Then, When } from 'cucumber';
-import { expect, assert } from 'chai';
 import { AppPage } from '../pages/app.po';
 
 let page: AppPage;
 
-Before(() => {
+let chai = require('chai');
+chai.use(require('chai-as-promised'));
+chai.use(require('chai-match'));
+let expect = chai.expect;
+let assert = chai.assert
+
+Before(async () => {
   page = new AppPage();
+  await page.navigateTo();
 });
 
 When('ich einen Wohnort auswählen möchte', async () => {
-    await page.navigateTo();
+    return await 'ok';
 });
 
 Then('soll mir eine Liste von Wohnorten vorgegeben werden', async () => {
-    assert.isNotEmpty(page.getCountries());
+    return await assert.isNotEmpty(page.getCountries());
 });
 
 Given('ich möchte einen Vertrag berechnen', async () => {
-    await page.navigateTo();
+    return await 'ok';
 });
 
-Given('der Multiplikator für {string} ist {float}', function (string, float) {
-    return 'ok';
+Given('der Multiplikator für {string} ist {float}', async (string, float) => {
+    return await 'ok';
 });
 
-Given('der Sockelbetrag ist {float} Euro', function (float) {
-    return 'ok';
+Given('der Sockelbetrag ist {float} Euro', async (float) => {
+    return await 'ok';
 });
 
-Given('ich wohne in {string}', function (string) {
-    return 'ok';
-    //return page.enterNameInput(string);
+Given('ich heiße {string}', async (name) => {
+    return await page.enterNameInput(name);
 });
 
-Given('ich bin {int} Jahre alt', function (int) {
-    return 'ok';
-    // const now = new Date();
-    // now.setFullYear(now.getFullYear() - int);
-    // var dateString = formatDate(now, "dd.MM.yyyy", "de")
-    // return page.enterDateInput(dateString);
+Given('ich wohne in {string}', async (country) =>  {
+    return page.enterCountryInput(country);
 });
 
-When('ich einen Vertrag berechne', function () {
-    return page.pushCalculateButton();
+Given('ich bin {int} Jahre alt', async (age) => {
+    return await page.enterDateInput(age);
 });
 
-Then('soll ein Beitrag von {float} Euro ermittelt werden', function (float) {
-    return 'ok';
-    //return expect(page.getPremium()).to.equal(float);
+When('ich einen Vertrag berechne', async() => {
+    return await page.pushCalculateButton();
 });
 
-When('ich ein Datum auswähle', function () {
-    return 'pending';
+Then('soll ein Beitrag von {float} Euro ermittelt werden', async (premium) => {
+    var premiumString = parseFloat(premium).toFixed(2).replace('.',',') + " €";
+    return await expect(Promise.resolve(page.getPremium())).to.eventually.equal(premiumString);
 });
 
-Then('soll dies im Format {string} angezeigt werden', function (string) {
-    return 'pending';
+When('ich ein Datum auswähle', async () => {
+    return await 'pending';
 });
 
+Then('soll das Datum im deutschen Format angezeigt werden', async () => {
+    return await 'pending';
+  });
 
-When('ich einen Beitrag berechnet habe', function () {
-    return 'pending';
+When('ich einen Beitrag berechnet habe', async () => {
+    await page.enterNameInput("Marko");
+    await page.enterCountryInput("Deutschland");
+    await page.enterDateInput(40);
+    return await page.pushCalculateButton();
 });
 
-Then('soll der Beitrag im Format {string} engezeigt werden', function (string) {
-    return 'pending';
+Then('soll der Beitrag im deutschen Format mit Euro Zeichen angezeigt werden', async () => {
+    return await expect(Promise.resolve(page.getPremium()))
+    .to.eventually.match(/[0-9]+[,]{1}[0-9]{2}[ ]{1}[€]{1}/);
 });
+
 

@@ -2,6 +2,7 @@ HELP.md
 .gradle
 build/
 allure-results/
+.allure/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**
 !**/src/test/**

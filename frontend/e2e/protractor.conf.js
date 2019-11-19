@@ -12,7 +12,8 @@ exports.config = {
   cucumberOpts: {
     require: ['./src/steps/**/*.steps.ts'],
     format: [
-      'json:../reports/bddui.json'
+      'json:../reports/bddui.json',
+      './e2e/allure-reporter.ts'
     ], 
     tags: '@ui'
   },

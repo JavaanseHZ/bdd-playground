@@ -75,8 +75,9 @@ task bddUnitTest() {
 	dependsOn assemble, compileTestUnitBddJava
 	doLast {
 		javaexec {
+			systemProperty 'allure.results.directory', 'build/allure-reports'
 			main = "io.cucumber.core.cli.Main"
-			classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.testUnitBdd.output
+			classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.testUnitBdd.output + sourceSets.testUnitBdd.resources
 			args = ['--plugin', 'pretty',
 					'--plugin', 'junit:build/test-results/cucumber-junit.xml',
 					'--plugin', 'json:../reports/bddunit.json',
@@ -91,8 +92,9 @@ task bddIntegrationTest() {
 	dependsOn assemble, compileTestIntegrationBddJava
 	doLast {
 		javaexec {
+			systemProperty 'allure.results.directory', 'build/allure-reports'
 			main = "io.cucumber.core.cli.Main"
-			classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.testIntegrationBdd.output
+			classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.testIntegrationBdd.output + sourceSets.testIntegrationBdd.resources
 			args = ['--plugin', 'pretty',
 					'--plugin', 'junit:build/test-results/cucumber-springboot.xml',
 					'--plugin', 'json:../reports/bddintegration.json',
@@ -111,5 +113,36 @@ cluecumberReports {
 
 allure {
 	autoconfigure = true
-	version = '2.4.1'
+	version = '2.8.1'
+}
+
+import groovy.sql.Sql
+
+task saveTests () {
+	configurations {
+		jdbc
+	}
+	dependencies {
+		jdbc 'org.postgresql:postgresql:42.2.7'
+	}
+
+	doLast {
+		File testReportDir = file("${project.buildDir}/allure-reports")
+		def collection = layout.files { testReportDir.listFiles() }
+		def sqlClassLoader = Sql.classLoader
+		configurations.jdbc.each { sqlClassLoader.addURL it.toURI().toURL() }
+		def driver = 'org.postgresql.Driver'
+		def dburl = "jdbc:postgresql://localhost:5432/postgres"
+
+		println testReportDir
+
+		collection.each {
+			println it.name
+			def map = [buildid:'0.0.1', reporttype:'allure', report:it.bytes]
+			Sql.withInstance(dburl, 'postgres', 'postgres', driver) {
+				sql -> sql.execute "insert into reports (buildid, reporttype, report) values ($map.buildid, $map.reporttype, $map.report)"
+				}
+
+		}
+	}
 }

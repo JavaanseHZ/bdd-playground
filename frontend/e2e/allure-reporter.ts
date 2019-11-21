@@ -4,7 +4,7 @@ export default class Reporter extends CucumberJSAllureFormatter {
   constructor(options) {
     super(
       options,
-      new AllureRuntime({ resultsDir: "./out/allure-results" }),
+      new AllureRuntime({ resultsDir: "../allure-results" }),
       {
         labels: {
           issue: [/@bug_(.*)/],

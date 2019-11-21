@@ -8,7 +8,7 @@ plugins {
 }
 
 group = 'de.javaansehz'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.2-SNAPSHOT'
 
 def cucumberVersion = '4.8.0'
 def junitVersion = '5.5.0'
@@ -75,7 +75,7 @@ task bddUnitTest() {
 	dependsOn assemble, compileTestUnitBddJava
 	doLast {
 		javaexec {
-			systemProperty 'allure.results.directory', 'build/allure-reports'
+			systemProperty 'allure.results.directory', '../allure-results'
 			main = "io.cucumber.core.cli.Main"
 			classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.testUnitBdd.output + sourceSets.testUnitBdd.resources
 			args = ['--plugin', 'pretty',
@@ -92,7 +92,7 @@ task bddIntegrationTest() {
 	dependsOn assemble, compileTestIntegrationBddJava
 	doLast {
 		javaexec {
-			systemProperty 'allure.results.directory', 'build/allure-reports'
+			systemProperty 'allure.results.directory', '../allure-results'
 			main = "io.cucumber.core.cli.Main"
 			classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.testIntegrationBdd.output + sourceSets.testIntegrationBdd.resources
 			args = ['--plugin', 'pretty',
@@ -127,7 +127,7 @@ task saveTests () {
 	}
 
 	doLast {
-		File testReportDir = file("${project.buildDir}/allure-reports")
+		File testReportDir = file("../allure-results")
 		def collection = layout.files { testReportDir.listFiles() }
 		def sqlClassLoader = Sql.classLoader
 		configurations.jdbc.each { sqlClassLoader.addURL it.toURI().toURL() }

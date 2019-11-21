@@ -4,9 +4,15 @@ Funktionalität: Validierung der Kundeneingabe
     Als Kunde möchte ich meinen Namen, mein Geburtsdatum und meinen Wohnort eingeben.
     Dabei soll ich Hinweise bekommen, wenn ich falsche Eingaben mache.
     Das erlaubte Alter liegt dabei zwischen 18 und 65.
-    
+
     @ui
     Szenario: Alle Eingaben korrekt angegeben
+        Angenommen ich habe alle anderen Angaben korrekt eingegeben
+        Wenn ich einen Vertrag berechne
+        Dann soll kein Hinweis erscheinen
+
+    @new @severity=blocker @issue=123
+    Szenario: Neues Szenario
         Angenommen ich habe alle anderen Angaben korrekt eingegeben
         Wenn ich einen Vertrag berechne
         Dann soll kein Hinweis erscheinen
@@ -26,25 +32,25 @@ Funktionalität: Validierung der Kundeneingabe
         Und ich habe alle anderen Angaben korrekt eingegeben
         Wenn ich einen Vertrag berechne
         Dann soll ein Hinweis zur Korrektur für den "Namen" erscheinen
-    
+
     Szenario: Geburtsdatum nicht angegeben
         Angenommen ich gebe kein "Geburtsdatum" an
         Und ich habe alle anderen Angaben korrekt eingegeben
         Wenn ich einen Vertrag berechne
         Dann soll ein Hinweis zur Korrektur für das "Geburtsdatum" erscheinen
-    
+
     Szenario: Geburtsdatum, jünger als 18 Jahre
         Angenommen ich bin 17 Jahre alt
         Und ich habe alle anderen Angaben korrekt eingegeben
         Wenn ich einen Vertrag berechne
         Dann soll ein Hinweis zur Korrektur für das "Geburtsdatum" erscheinen
-    
+
     Szenario: Geburtsdatum, älter als 65 Jahre
         Angenommen ich bin 66 Jahre alt
         Und ich habe alle anderen Angaben korrekt eingegeben
         Wenn ich einen Vertrag berechne
         Dann soll ein Hinweis zur Korrektur für das "Geburtsdatum" erscheinen
-    
+
     Szenario: Wohnort nicht angegeben
         Angenommen ich gebe keinen "Wohnort" an
         Und ich habe alle anderen Angaben korrekt eingegeben

@@ -75,7 +75,8 @@ task bddUnitTest() {
 	dependsOn assemble, compileTestUnitBddJava
 	doLast {
 		javaexec {
-			systemProperty 'allure.results.directory', '../allure-results'
+			systemProperty 'allure.results.directory', 'build/allure-results'
+			systemProperty 'allure.link.issue.pattern', 'https://github.com/JavaanseHZ/bdd-playground/issues/{}'
 			main = "io.cucumber.core.cli.Main"
 			classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.testUnitBdd.output + sourceSets.testUnitBdd.resources
 			args = ['--plugin', 'pretty',
@@ -83,7 +84,8 @@ task bddUnitTest() {
 					'--plugin', 'json:../reports/bddunit.json',
 					'--plugin', 'io.qameta.allure.cucumber4jvm.AllureCucumber4Jvm',
 					'--glue', 'de.javaansehz.backend', '../features',
-					'--tags', '@unit or @simple']
+					'--strict',
+					'--tags', '@unit or @simple or @new']
 		}
 	}
 }

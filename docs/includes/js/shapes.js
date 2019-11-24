@@ -135,6 +135,18 @@ function ellipse (canvas, x, y, w, h, color, text, textcolor){
     }
 }
 
+function ellipseStrokeWidth (canvas, x, y, w, h, color, fillColor, strokeWidth){
+    var rcC = rough.canvas(canvas);
+
+    rcC.ellipse(x + (w/2), y + (h/2), w, h, {
+        stroke: color,
+        strokeWidth: strokeWidth,
+        fill: fillColor,
+        fillStyle: 'solid',
+        roughness:'1'
+    });
+}
+
 function arrow (canvas, startx, starty, endx, endy, color){
     var deltaY = endy - starty;
     var deltaX = endx - startx;
@@ -181,6 +193,16 @@ function svgPathNoFill(canvas, svgPath, color) {
   rcC.path(svgPath, {
       stroke: color,
       strokeWidth: '4',
+      roughness:'2'
+  });
+}
+
+function svgPathStrokeWidthNoFill(canvas, svgPath, color, strokeWidth) {
+  var rcC = rough.canvas(canvas);
+
+  rcC.path(svgPath, {
+      stroke: color,
+      strokeWidth: strokeWidth,
       roughness:'2'
   });
 }
@@ -233,6 +255,59 @@ function svgPolygon(canvas, vertices, color, text, textcolor, fontsize, fontXpos
           context.fillText(text, fontXpos, fontYpos);
       });
   }
+}
 
+function svgPolygonHatchure(canvas, vertices, color){
+  var rcC = rough.canvas(canvas);
+
+  rcC.polygon(vertices, {
+    stroke: transientWhite,
+    strokeWidth: 0,
+    roughness: 2,
+    fill: transientWhite,
+    fillStyle: 'solid'
+  });
+
+  rcC.polygon(vertices, {
+    stroke: color,
+    strokeWidth: 4,
+    roughness: 2,
+    hachureAngle: 60,
+    hachureGap: 10,
+    fillWeight:1,
+    fill: color,
+    fillStyle: 'hachure'
+  });
+
+}
+
+function rectangleFillHatchure (canvas, x, y, w, h, color){
+    var rcC = rough.canvas(canvas);
+
+    rcC.rectangle(x, y, w, h, {
+      stroke: color,
+      strokeWidth: 4,
+      roughness: 2,
+      hachureAngle: 60,
+      hachureGap: 10,
+      fillWeight:1,
+      fill: color,
+      fillStyle: 'hachure'
+    });
+}
+
+function svgArcHachure(canvas, x, y, width, height, start, stop, color) {
+  var rcC = rough.canvas(canvas);
+
+  rcC.arc(x, y, width, height, start, stop, true, {
+      stroke: color,
+      strokeWidth: 4,
+      roughness: 2,
+      hachureAngle: 60,
+      hachureGap: 10,
+      fillWeight:1,
+      fill: color,
+      fillStyle: 'hachure'
+  });
 }
 // Functions END
